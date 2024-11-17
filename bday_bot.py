@@ -42,10 +42,19 @@ def main():
 
 def send_greetings(name: str, quote: dict):
     load_dotenv()
-    os.getenv("WEBHOOK")
-    print(f"Happy Birthday, {name}!")
-    print(f"{quote['quote']} - {quote['author']}")
-    print(quote["url"])
+    text = f"""
+<b>Alles Gute, {name}!</b><br>
+<i>{quote['quote']}</i> - <a href={quote["url"]}>{quote['author']}</a>
+"""
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(
+        os.getenv("WEBHOOK"),
+        json={"text": text},
+        headers=headers,
+        timeout=60,
+    )
+    print(response.status_code)
+    print(response.content)
 
 
 if __name__ == "__main__":
