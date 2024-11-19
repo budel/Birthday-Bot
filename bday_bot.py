@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime, timedelta
 import os
+import pathlib
 import requests
 from dotenv import load_dotenv
 
@@ -10,7 +11,7 @@ from lotr_quotes import get_lotr_quote
 
 def main():
     # Load the CSV file
-    with open("birthdays.csv", mode="r") as file:
+    with open(pathlib.Path(__file__).parent / "birthdays.csv", mode="r") as file:
         csv_reader = csv.DictReader(file)
 
         # Get current date
