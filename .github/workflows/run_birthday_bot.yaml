@@ -1,0 +1,18 @@
+name: Get menus and deploy as webpage
+
+on:
+  schedule:
+    # Runs at 7 AM UTC (8 AM MEZ / 9 AM MESZ)
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decrypt GPG file
+        run: |
+          gpg --batch --yes --pinentry-mode loopback --passphrase="${{ secrets.GPG_PASSPHRASE }}" \
+          --decrypt --output birthdays.csv birthdays.csv.gpg
