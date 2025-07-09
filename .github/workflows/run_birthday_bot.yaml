@@ -11,11 +11,20 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
+        with:
+          fail-mode: true
+
       - name: Decrypt GPG file
-        run: |
-          gpg --batch --yes --pinentry-mode loopback --passphrase="${{ secrets.GPG_PASSPHRASE }}" \
-          --decrypt --output birthdays.csv birthdays.csv.gpg
-          python3 bday_bot.py
+        run: nix develop --command gpg --batch --yes --pinentry-mode loopback --passphrase="${{ secrets.GPG_PASSPHRASE }}" --decrypt --output birthdays.csv birthdays.csv.gpg
+      - name: Run bday_bot
+        run: nix develop --command python3 bday_bot.py
         env:
           WEBHOOK: ${{ secrets.WEBHOOK }}

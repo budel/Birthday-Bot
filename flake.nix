@@ -13,8 +13,11 @@
       };
     in {
       devShell = pkgs.mkShell {
-        buildInputs = [
-          pkgs.gnupg
+        buildInputs = with pkgs; [
+          gnupg
+          python313
+          python313Packages.python-dotenv
+          python313Packages.requests
         ];
       };
     });
