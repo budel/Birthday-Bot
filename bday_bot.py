@@ -39,6 +39,8 @@ def main():
                         send_greetings(row["name"], quote)
                     except Exception as e:
                         print(e.args)
+            else:
+                print("No Birthday today! (╯°-°)╯")
 
 
 def send_greetings(name: str, quote: dict):
