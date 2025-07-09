@@ -1,4 +1,4 @@
-name: Get menus and deploy as webpage
+name: Run Birthday Bot
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,3 +16,6 @@ jobs:
         run: |
           gpg --batch --yes --pinentry-mode loopback --passphrase="${{ secrets.GPG_PASSPHRASE }}" \
           --decrypt --output birthdays.csv birthdays.csv.gpg
+          python3 bday_bot.py
+        env:
+          WEBHOOK: ${{ secrets.WEBHOOK }}
