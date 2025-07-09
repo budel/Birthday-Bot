@@ -23,10 +23,12 @@ def main():
             birthday = datetime.strptime(row["birthday"], "%d.%m.")
 
             # Check if today is the birthday
+            today_is_bday = False
             if (
                 birthday.month == current_date.month
                 and birthday.day == current_date.day
             ):
+                today_is_bday = True
                 try:
                     quote = get_asozial_quote()
                     print(quote)
@@ -39,7 +41,7 @@ def main():
                         send_greetings(row["name"], quote)
                     except Exception as e:
                         print(e.args)
-            else:
+            if not today_is_bday:
                 print("No Birthday today! (╯°-°)╯")
 
 
