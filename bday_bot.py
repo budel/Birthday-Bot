@@ -17,13 +17,13 @@ def main():
         # Get current date
         current_date = datetime.now()
 
+        today_is_bday = False
         # Iterate over each row in the CSV
         for row in csv_reader:
             # Assuming the CSV has columns named 'name' and 'birthday' in the format 'MM-DD'
             birthday = datetime.strptime(row["birthday"], "%d.%m.")
 
             # Check if today is the birthday
-            today_is_bday = False
             if (
                 birthday.month == current_date.month
                 and birthday.day == current_date.day
@@ -41,8 +41,8 @@ def main():
                         send_greetings(row["name"], quote)
                     except Exception as e:
                         print(e.args)
-            if not today_is_bday:
-                print("No Birthday today! (╯°-°)╯")
+        if not today_is_bday:
+            print("No Birthday today! (╯°-°)╯")
 
 
 def send_greetings(name: str, quote: dict):
