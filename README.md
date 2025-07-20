@@ -9,6 +9,17 @@ pip install -r requirements.txt
 ```
 I recommend using a virtual environment with `python3-venv`.
 
+## Create birthdays
+Encrypt with
+```
+nix develop -c gpg --batch --yes --pinentry-mode loopback --passphrase=$GPG_PASSPHRASE --symmetric --output birthdays.csv.gpg birthdays.csv
+```
+
+Decrypt with
+```
+nix develop -c gpg --batch --yes --pinentry-mode loopback --passphrase=$GPG_PASSPHRASE --decrypt --output birthdays.csv birthdays.csv.gpg
+```
+
 ## Configure and run
 
 Create a .env file with your MS Teams Webhook.
