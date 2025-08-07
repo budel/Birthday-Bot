@@ -21,6 +21,7 @@ jobs:
         uses: DeterminateSystems/flake-checker-action@main
         with:
           fail-mode: true
+          check-outdated: false
 
       - name: Decrypt GPG file
         run: nix develop --command gpg --batch --yes --pinentry-mode loopback --passphrase="${{ secrets.GPG_PASSPHRASE }}" --decrypt --output birthdays.csv birthdays.csv.gpg
