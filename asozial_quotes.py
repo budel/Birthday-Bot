@@ -1,7 +1,7 @@
 import requests
 
 def get_asozial_quote():
-    response = requests.get("https://asozial.org/api/zitate")
+    response = requests.get("https://asozial.org/api/zitate/385-817")
     if response.status_code == 200:
         quote = response.json()
         quote["url"] = f"https://asozial.org/api/zitate/{quote['id']}"
