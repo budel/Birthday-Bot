@@ -1,5 +1,7 @@
 birthdays.csv
 bday/
+.envrc
+.direnv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
